@@ -24,7 +24,7 @@ const FilterExtensions = () => {
               key={value}
               onClick={() => setFilter(value)}
               className={`relative px-4 py-1 shadow-md cursor-pointer rounded-20 transition-all overflow-hidden
-                dark:border-[#d6e2f525] dark:border-1
+                dark:border-[#d6e2f525] dark:border-1 dark:hover:bg-red-500
                 focus:outline-offset-2 focus:outline-red-500 
                 active:bg-red-500
                 ${isActive ? "text-white" : "text-black dark:text-white"}
