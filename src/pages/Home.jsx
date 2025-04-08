@@ -8,7 +8,7 @@ const Home = () => {
       <section className="flex justify-center items-center w-full">
         <FilterExtensions />
       </section>
-      <section className="w-full bg-amber-700 flex justify-center py-5">
+      <section className="w-full flex justify-center py-5">
         <ExtensionsList />
       </section>
     </div>

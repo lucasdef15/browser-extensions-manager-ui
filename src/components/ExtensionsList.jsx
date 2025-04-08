@@ -1,30 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { Switch } from "@/components/ui/switch";
+import { ExtensionContext } from "@/context/context";
 
 const ExtensionsList = () => {
-  const [extensions, setExtensions] = useState([]);
+  const { extensions, handleToggle } = useContext(ExtensionContext);
 
-  useEffect(() => {
-    fetch("/data.json")
-      .then((response) => response.json())
-      .then((data) => setExtensions(data))
-      .catch((error) => console.error("Error loading data:", error));
-  }, []);
+  if (!extensions) return <p>Loading...</p>;
 
   return (
-    <div className="flex flex-wrap gap-4 w-[90%] bg-amber-400">
-      {extensions.map((ext, index) => (
+    <div className="flex justify-center flex-wrap gap-4 w-[90%]">
+      {extensions?.map((ext, index) => (
         <div
           key={index}
-          className="flex-1 min-w-[300px] md:max-w-[350px] max-w-[100%]  bg-white p-4 rounded shadow"
+          className="flex-1 flex-col gap-3 min-w-[280px] max-w-[350px]  bg-white dark:bg-neutral-700 p-4 rounded-20 shadow"
         >
-          <img src={ext.logo} alt={ext.name} className="w-16 h-16" />
-          <h2 className="text-xl font-bold mt-2">{ext.name}</h2>
-          <p className="text-sm text-neutral-600 dark:text-neutral-300">
-            {ext.description}
-          </p>
-          {!ext.isActive && (
-            <span className="text-red-500 font-semibold">Inactive</span>
-          )}
+          <div key={index} className="flex flex-1 flex-row gap-3">
+            <div>
+              <img src={ext?.logo} alt={ext?.name} className="w-16 h-16" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold mt-2">{ext?.name}</h2>
+              <p className="text-sm text-neutral-600 dark:text-neutral-300">
+                {ext.description}
+              </p>
+            </div>
+          </div>
+          <div className="flex justify-between items-center pt-5 pb-1.5">
+            <button className="border-[#d6e2f5b2] hover:bg-red-700 active:outline-red-600 focus-within:outline-red-500 transition-all hover:text-white cursor-pointer font-medium border-1 text-sm  rounded-20 px-2 py-1">
+              Remove
+            </button>
+            <Switch
+              onCheckedChange={() => handleToggle(index)}
+              className="data-[state=checked]:bg-red-700 dark:data-[state=checked]:bg-red-400 hover:data-[state=checked]:bg-red-500 hover:cursor-pointer data-[state=unchecked]:bg-gray-300"
+              checked={ext?.isActive}
+            />
+          </div>
         </div>
       ))}
     </div>
