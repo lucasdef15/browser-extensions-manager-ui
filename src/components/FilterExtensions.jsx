@@ -12,7 +12,7 @@ const FilterExtensions = () => {
   ];
 
   return (
-    <section className="flex justify-center md:justify-between items-center text-lg font-bold py-15 px-2 w-[90%] gap-3 flex-wrap">
+    <section className="flex justify-center md:justify-between items-center text-lg font-bold pt-12 pb-5 px-2 w-[90%] gap-3 flex-wrap">
       <h1 className="text-3xl">Extensions List</h1>
 
       <section className="flex gap-2 relative">

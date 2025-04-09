@@ -3,7 +3,8 @@ import { Switch } from "@/components/ui/switch";
 import { ExtensionContext } from "@/context/context";
 
 const ExtensionsList = () => {
-  const { extensions, handleToggle } = useContext(ExtensionContext);
+  const { extensions, handleToggle, handleRemove } =
+    useContext(ExtensionContext);
 
   if (!extensions) return <p>Loading...</p>;
 
@@ -12,9 +13,9 @@ const ExtensionsList = () => {
       {extensions?.map((ext, index) => (
         <div
           key={index}
-          className="flex-1 flex-col gap-3 min-w-[280px] max-w-[350px]  bg-white dark:bg-neutral-700 p-4 rounded-20 shadow"
+          className="flex flex-col justify-between gap-3 min-w-[280px] max-w-[350px] bg-white dark:bg-neutral-700 p-4 rounded-20 shadow "
         >
-          <div key={index} className="flex flex-1 flex-row gap-3">
+          <div className="flex flex-row gap-3">
             <div>
               <img src={ext?.logo} alt={ext?.name} className="w-16 h-16" />
             </div>
@@ -25,8 +26,11 @@ const ExtensionsList = () => {
               </p>
             </div>
           </div>
-          <div className="flex justify-between items-center pt-5 pb-1.5">
-            <button className="border-[#d6e2f5b2] hover:bg-red-700 active:outline-red-600 focus-within:outline-red-500 transition-all hover:text-white cursor-pointer font-medium border-1 text-sm  rounded-20 px-2 py-1">
+          <div className="mt-auto flex justify-between items-center pt-5 pb-1.5">
+            <button
+              onClick={() => handleRemove(index)}
+              className="border-[#d6e2f5b2] hover:bg-red-700 active:outline-red-600 focus-within:outline-red-500 transition-all hover:text-white cursor-pointer font-medium border-1 text-sm rounded-20 px-2 py-1"
+            >
               Remove
             </button>
             <Switch

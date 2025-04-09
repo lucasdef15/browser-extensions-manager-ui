@@ -19,6 +19,11 @@ export const ExtensionProvider = ({ children }) => {
     setExtensions(updated);
   };
 
+  const handleRemove = (index) => {
+    const updated = extensions.filter((_, i) => i !== index);
+    setExtensions(updated);
+  };
+
   const filteredExtensions = extensions.filter((ext) => {
     if (filter === "active") return ext.isActive;
     if (filter === "inactive") return !ext.isActive;
@@ -31,6 +36,7 @@ export const ExtensionProvider = ({ children }) => {
         extensions: filteredExtensions,
         handleToggle,
         setFilter,
+        handleRemove,
         currentFilter: filter,
       }}
     >
